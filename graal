@@ -4,8 +4,8 @@ GRAALVM_HOME="/usr/lib/jvm/java-17-graalvm"
 "$GRAALVM_HOME/bin/gu" install native-image
 
 "$GRAALVM_HOME/bin/native-image" \
-    -jar target/name*.jar \
-    -H:Name=name \
+    -jar target/mensascrap2*.jar \
+    -H:Name=mensascrap2 \
     -H:+ReportExceptionStackTraces \
     --enable-url-protocols=https \
     --verbose \
