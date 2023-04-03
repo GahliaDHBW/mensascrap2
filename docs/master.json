@@ -1,0 +1,116 @@
+{
+    "head": {
+        "api-version": "v2-rc1",
+        "last-updated": "Mon  3 Apr 17:17:47 CEST 2023"
+        "source": "www.imensa.de"
+        "debug-message": ""
+        "status": 200
+    },
+    "body": {
+        "Erzbergerstraße": {
+            "monday": {
+                "meal1": {
+                    "name": "Frikadelle Hausfrauen Art mit Kräutersoße und Kartoffeln",
+                    "type": "Schwein",
+                    "price": 3.2
+                },
+                "meal2": {
+                    "name": "Veganes Gemüseschnitzel Risoleekartoffeln Kräutersoße",
+                    "type": "vegetarisch",
+                    "price": 3.2
+                },
+            },
+            "tuesday": {
+                "meal1": {
+                    "name": "Alaska Seelachsfilet in Backteig hausgemachter Kartoffelsalat Dip",
+                    "type": "Fisch",
+                    "price": 4.15
+                },
+                "meal2": {
+                    "name": "Gemüsefrikadellen hausgemachter Kartoffelsalat Dip",
+                    "type": "vegetarisch",
+                    "price": 3.20
+                }
+            },
+            "wednesday": {
+                "meal1": {
+                    "name": "Roter Curry-Gemüseeintopf mit Hähnchenstreifen und Baguettebrötchen",
+                    "type": "-",
+                    "price": 3.2
+                },
+                "meal2": {
+                    "name": "Roter Curry-Gemüseeintopf mit Sojastreifen und Baguettebrötchen",
+                    "type": "vegan",
+                    "price": 3.2
+                }
+            },
+            "thursday": {
+                "meal1": {
+                    "name": "Pasta mit Broccoli-Schinkensoße und Reibekäse",
+                    "type": "Schwein",
+                    "price": 3.2
+                },
+                "meal2": {
+                    "name": "Pasta mit Rote Linsen-Bolognese und Reibekäse",
+                    "type": "vegetarisch",
+                    "price": 3.2
+                }
+            },
+            "friday": "closed"
+        },
+        "Schloss Gottesaue": "unavailable",
+        "Cafetaria Moltkestraße": {
+            "monday": {
+                "meal1": {
+                    "name": "Frikadelle Hausfrauen Art mit Kräutersoße und Kartoffeln",
+                    "type": "Schwein",
+                    "price": 3.2
+                },
+                "meal2": {
+                    "name": "Kaiserschmarrn mit Rosinen und Apfelmus",
+                    "type": "vegetarisch",
+                    "price": 3.2
+                }
+            }
+            "tuesday": {
+                "meal1": {
+                    "name": "Pasta Carbonara mit Reibekäse",
+                    "type": "Schwein",
+                    "price": 3.2
+                },
+                "meal2": {
+                    "name": "Pasta in Zucchini-Tomatensoße auf Wunsch mit Reibekäse",
+                    "type": "vegetarisch",
+                    "price": 3.2
+                }
+            }
+            "wednesday": {
+                "meal1": {
+                    "name": "Roter Curry-Gemüseeintopf mit Hähnchenstreifen und Baguettebrötchen",
+                    "type": "-",
+                    "price": 3.2
+                },
+                "meal2": {
+                    "name": "Roter Curry-Gemüseeintopf mit Tofu und Baguettebrötchen",
+                    "type": "vegan",
+                    "price": 3.2
+                }
+            }
+            "thursday": {
+                "meal1": {
+                    "name": "Pasta Broccoli-Schinkensoße, geriebener Gouda",
+                    "type": "Schwein",
+                    "price": 3.2
+                }
+                "meal2": {
+                    "name": "Pasta Rote Linsen-Bolognese auf Wunsch mit Reibekäse",
+                    "type": "vegetarisch",
+                    "price": 3.2
+                }
+            }
+            "friday": "closed"
+        },
+        "Mensa Moltke": "not implemented",
+        "Mensa Adenauerring": "not implemented"
+    }
+}
