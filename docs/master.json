@@ -1,7 +1,7 @@
 {
     "head": {
         "api-version": "v2-rc1",
-        "last-updated": "Mon  3 Apr 17:17:47 CEST 2023",
+        "last-updated": "Mon  3 Apr 17:48:12 CEST 2023",
         "source": "www.imensa.de",
         "debug-message": "",
         "status": 200
@@ -18,7 +18,7 @@
                     "name": "Veganes Gemüseschnitzel Risoleekartoffeln Kräutersoße",
                     "type": "vegetarisch",
                     "price": 3.2
-                },
+                }
             },
             "tuesday": {
                 "meal1": {
@@ -71,7 +71,7 @@
                     "type": "vegetarisch",
                     "price": 3.2
                 }
-            }
+            },
             "tuesday": {
                 "meal1": {
                     "name": "Pasta Carbonara mit Reibekäse",
@@ -83,7 +83,7 @@
                     "type": "vegetarisch",
                     "price": 3.2
                 }
-            }
+            },
             "wednesday": {
                 "meal1": {
                     "name": "Roter Curry-Gemüseeintopf mit Hähnchenstreifen und Baguettebrötchen",
@@ -95,19 +95,19 @@
                     "type": "vegan",
                     "price": 3.2
                 }
-            }
+            },
             "thursday": {
                 "meal1": {
                     "name": "Pasta Broccoli-Schinkensoße, geriebener Gouda",
                     "type": "Schwein",
                     "price": 3.2
-                }
+                },
                 "meal2": {
                     "name": "Pasta Rote Linsen-Bolognese auf Wunsch mit Reibekäse",
                     "type": "vegetarisch",
                     "price": 3.2
                 }
-            }
+            },
             "friday": "closed"
         },
         "Mensa Moltke": "not implemented",
