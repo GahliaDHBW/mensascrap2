@@ -1,9 +1,9 @@
 {
     "head": {
         "api-version": "v2-rc1",
-        "last-updated": "Mon  3 Apr 17:17:47 CEST 2023"
-        "source": "www.imensa.de"
-        "debug-message": ""
+        "last-updated": "Mon  3 Apr 17:17:47 CEST 2023",
+        "source": "www.imensa.de",
+        "debug-message": "",
         "status": 200
     },
     "body": {
