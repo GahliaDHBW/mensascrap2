@@ -3,9 +3,17 @@
             [clj-http.client :as client]
             [cheshire.core :as cheshire]
             [hickory.core :as h]
-            [hickory.select :as s])
+            [hickory.select :as s]
+            [clojure.math.combinatorics :as combo])
   (:gen-class))
 
+(def endpoints (let [mensas #{"/mensa-erzbergerstrasse" "/mensa-schloss-gottesaue" "/cafeteria-moltkestrasse-30" "/mensa-moltke" "/mensa-am-adenauerring"}
+                     days #{"/montag" "/dienstag" "/mittwoch" "/donnerstag" "/freitag"}
+                     extensions #{".html"}
+                     combinations (combo/cartesian-product mensas days extensions)]
+                 (map (partial apply str) combinations)))
+
+; How do we deal with request failure?
 (def primary "https://www.imensa.de/karlsruhe")
 (defn request
   [endpoint]
