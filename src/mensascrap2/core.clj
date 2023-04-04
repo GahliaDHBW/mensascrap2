@@ -14,11 +14,9 @@
                  (map (partial apply str) combinations)))
 
 ; How do we deal with request failure?
-(def primary "https://www.imensa.de/karlsruhe")
-(defn request
-  [endpoint]
-  (let [response (client/get (str primary endpoint))]
-    (cond (= (:status response) 200) {:source primary :resp (-> (:body response) h/parse h/as-hickory)})))
+(defn request [endpoint]
+  (let [response (client/get (str "https://www.imensa.de/karlsruhe" endpoint))]
+    (cond (= (:status response) 200) (->> response :body h/parse h/as-hickory))))
 
 (def sample (request "/mensa-erzbergerstrasse/montag.html"))
 
