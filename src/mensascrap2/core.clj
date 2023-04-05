@@ -13,27 +13,16 @@
                      combinations (combo/cartesian-product mensas days extensions)]
                  (map (partial apply str) combinations)))
 
-; How do we deal with request failure?
 (defn request [endpoint]
   (let [response (client/get (str "https://www.imensa.de/karlsruhe" endpoint))]
     (cond (= (:status response) 200) (->> response :body h/parse h/as-hickory))))
 
+; TODO How do we efficiently request all endpoints?
 (def sample (request "/mensa-erzbergerstrasse/montag.html"))
 
-; TODO retarget to imensa
-; bbyt select examples
-;(s/select (s/attr "dir"))
-;(s/select (s/class "length"))
-;(s/select (s/descendant (s/child (s/and (s/attr "href") (s/attr "style")))))
-; how do I select multiple times / how do I make selected stuff a document again?
-
-; HACK Old code lol
-(def subject (->> "sample.html" slurp h/parse h/as-hickory))
 (def relevantscope
-  (->> subject
-       (s/select (s/tag "table"))
-       first
-       :content))
+  (->> sample
+       (s/select (s/class "aw-meal-category"))))
 
 (defn -main [& args]
   (println "Hello World"))
