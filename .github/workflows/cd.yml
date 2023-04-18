@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: install clojure
-        run: sudo apt -y clojure
+        run: sudo apt --fix-missing update && sudo apt install -y clojure
 
       - name: run nothing, successfully
         run: exit 0
