@@ -1,0 +1,27 @@
+name: "continous awesomeness"
+on:
+  push:
+    branches: [ master ]
+  schedule:
+    - cron: "0 0 * * *"
+
+  jobs:
+    dominant_architecture:
+      runs-on: ubuntu-22.04
+      steps:
+        - uses: actions/checkout@v3
+
+        - name: install clojure
+          run: sudo apt --fix-missing update && sudo apt install -y clojure
+
+        - name: run mensascrap
+          run: clj -M -m mensascrap2.core
+
+        - name: auwuto commit uwu
+          uses: stefanzweifel/git-auto-commit-action@v4
+          with:
+            commit_message: "bump master.json"
+            repository: .
+            file_pattern: master.json
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
