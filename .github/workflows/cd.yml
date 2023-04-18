@@ -9,13 +9,22 @@ jobs:
   dominant_architecture:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@master
 
-      - name: install clojure
-        run: sudo apt --fix-missing update && sudo apt install -y clojure
+      - name: Prepare Java
+        uses: actions/setup-java@v3.11.0
+        with: 
+          distribution: 'zulu'
+          java-version: '17'
 
-      - name: run nothing, successfully
-        run: exit 0
+      - name: install clojure tools
+        uses: DeLaGuardo/setup-clojure@10.3
+        with: 
+          cli: 'latest'
+          
+      - name: run mensascrap
+        run: clj -M -m mensascrap2.core
 
       - name: auwuto commit uwu
         uses: stefanzweifel/git-auto-commit-action@v4
