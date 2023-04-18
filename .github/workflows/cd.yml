@@ -24,7 +24,7 @@ jobs:
           cli: 'latest'
           
       - name: run mensascrap
-        run: clj -M -m mensascrap2.core
+        run: clojure -M -m mensascrap2.core
 
       - name: auwuto commit uwu
         uses: stefanzweifel/git-auto-commit-action@v4
