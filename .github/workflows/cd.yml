@@ -15,7 +15,7 @@ jobs:
         run: sudo apt --fix-missing update && sudo apt install -y clojure
 
       - name: run mensascrap
-        run: clojure -M -m mensascrap2.core
+        run: clj -T:build uber
 
       - name: auwuto commit uwu
         uses: stefanzweifel/git-auto-commit-action@v4
