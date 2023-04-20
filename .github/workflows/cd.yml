@@ -11,10 +11,10 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Checkout
+      - name: checkout
         uses: actions/checkout@master
 
-      - name: Prepare Java
+      - name: prepare java
         uses: actions/setup-java@v3.11.0
         with: 
           distribution: 'zulu'
@@ -25,13 +25,19 @@ jobs:
         with: 
           cli: 'latest'
           
-      - name: run mensascrap
-        run: clojure -M -m mensascrap2.core > docs/master.json
+      - name: generate master.json
+        run: echo "out=$(clojure -M -m mensascrap2.core)" >> $GITHUB_ENV
+      
+      - name: generate commitmessage
+        run: echo "msg=$(clojure -M -m mensascrap2.core heh)" >> $GITHUB_ENV
+
+      - name: write master.json
+        run: echo "${{ env.out }}" > master.json
 
       - name: auwuto commit uwu
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "bump master.json"
+          commit_message: "${{ env.msg }}"
           repository: .
           file_pattern: docs/master.json
           commit_author: port19 <port19@port19.xyz>
