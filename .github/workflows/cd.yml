@@ -31,6 +31,6 @@ jobs:
         with:
           commit_message: "bump master.json"
           repository: .
-          file_pattern: master.json
+          file_pattern: docs/master.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
