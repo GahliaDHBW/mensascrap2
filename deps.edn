@@ -2,9 +2,7 @@
  :deps {org.clojure/clojure {:mvn/version "1.11.1"}
         org.clj-commons/hickory {:mvn/version "0.7.3"}
         clj-http/clj-http {:mvn/version "3.12.3"}
-        com.github.clj-easy/graal-build-time {:mvn/version "0.1.4"}
-        cheshire/cheshire {:mvn/version "5.11.0"}
-        org.clojure/math.combinatorics {:mvn/version "0.2.0"}}
+        cheshire/cheshire {:mvn/version "5.11.0"}}
 
  ;;; clj-kondo and clj-fmt are available at code-time through clojure-lsp
  ;;; how-to-ns is superseded by clj-kondo, yagni is not helpful
