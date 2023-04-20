@@ -13,7 +13,7 @@
 (defn typecheck
   "Valid types: vegetarisch, vegan, Schwein, Fisch"
   [type]
-  (let [t (str/join (drop-last 2 (first (str/split type #" "))))]
+  (let [t (apply str (drop-last 2 (first (str/split type #" "))))]
     (if (or (= t "vegetarisch") (= t "vegan") (= t "Schwein") (= t "Fisch")) t "-")))
 
 (defn parse-metadata [patient]
