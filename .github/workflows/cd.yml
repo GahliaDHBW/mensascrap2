@@ -32,7 +32,7 @@ jobs:
         run: echo "msg=$(clojure -M -m mensascrap2.core heh)" >> $GITHUB_ENV
 
       - name: write master.json
-        run: echo "${{ env.out }}" > master.json
+        run: echo "${{ env.out }}" > docs/master.json
 
       - name: auwuto commit uwu
         uses: stefanzweifel/git-auto-commit-action@v4
