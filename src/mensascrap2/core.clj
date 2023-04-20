@@ -10,25 +10,23 @@
   (let [response (client/get (str "https://www.imensa.de/karlsruhe" endpoint))]
     (if (= (:status response) 200) (->> response :body h/parse h/as-hickory) (:status response))))
 
-(def splice-div (comp (partial first) (partial :content) (partial first)))
-
 (defn typecheck
   "Valid types: vegetarisch, vegan, Schwein, Fisch"
   [type]
-  (let [t (apply str (drop-last 2 (first (str/split type #" "))))]
+  (let [t (str/join (drop-last 2 (first (str/split type #" "))))]
     (if (or (= t "vegetarisch") (= t "vegan") (= t "Schwein") (= t "Fisch")) t "-")))
 
 (defn parse-metadata [patient]
   (let [name (->> patient
                   (s/select (s/class "aw-meal-description"))
-                  (splice-div))
+                  (comp first :content first))
         type (->> patient
                   (s/select (s/and (s/tag "span")))
-                  (splice-div)
+                  (comp first :content first)
                   (typecheck))
         price (->> patient
                    (s/select (s/class "aw-meal-price"))
-                   (splice-div)
+                   (comp first :content first)
                    (drop-last 2)
                    (apply str)
                    (#(str/replace % "," ".")))]
@@ -40,7 +38,7 @@
        (s/select (s/class "aw-meal-category"))
        (map parse-metadata)))
 
-(defn -main [& args]
+(defn -main []
   (println (generate-string
             {:head {:api-version "v2"
                     :last-update (.toString (java.time.LocalDateTime/now))
