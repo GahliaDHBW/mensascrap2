@@ -39,7 +39,8 @@
        (map parse-metadata)))
 
 (defn -main
-  ([arg] (println (str/join " & " (drop-last (map :name (snipe "/mensa-erzbergerstrasse/index.html"))))))
+  ([arg1 arg2] (println (second (drop-last (map :name (snipe "/mensa-erzbergerstrasse/index.html"))))))
+  ([arg] (println (first (drop-last (map :name (snipe "/mensa-erzbergerstrasse/index.html"))))))
   ([] (println (generate-string
                 {:head {:api-version "v2"
                         :last-update (.toString (java.time.LocalDateTime/now))
