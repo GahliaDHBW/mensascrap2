@@ -8,6 +8,8 @@ on:
 jobs:
   dominant_architecture:
     runs-on: ubuntu-22.04
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -32,5 +34,6 @@ jobs:
           commit_message: "bump master.json"
           repository: .
           file_pattern: docs/master.json
+          commit_author: port19 <port19@port19.xyz>
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
