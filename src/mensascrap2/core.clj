@@ -42,11 +42,9 @@
 
 (defn -main [& args]
   (println (generate-string
-            {:head {:api-version "v2-rc2"
+            {:head {:api-version "v2"
                     :last-update (.toString (java.time.LocalDateTime/now))
-                    :source "www.imensa.de"
-                    :debug-message ""
-                    :status 200}
+                    :source "www.imensa.de"}
              :body {:Erzbergerstraße {:monday (snipe "/mensa-erzbergerstrasse/montag.html")
                                       :tuesday (snipe "/mensa-erzbergerstrasse/dienstag.html")
                                       :wednesday (snipe "/mensa-erzbergerstrasse/mittwoch.html")
