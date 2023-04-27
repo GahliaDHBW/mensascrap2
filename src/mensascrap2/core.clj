@@ -69,4 +69,4 @@
                                          :thursday (snipe "/mensa-am-adenauerring/donnerstag.html")
                                          :friday (snipe "/mensa-am-adenauerring/freitag.html")}}})))
 
-(-main)
+(comment (-main))
