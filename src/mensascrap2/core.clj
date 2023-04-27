@@ -6,10 +6,6 @@
             [hickory.select :as s])
   (:gen-class))
 
-(defn request [endpoint]
-  (let [response (client/get (str "https://www.imensa.de/karlsruhe" endpoint))]
-    (if (= (:status response) 200) (->> response :body h/parse h/as-hickory) (:status response))))
-
 (defn typecheck
   "Valid types: vegetarisch, vegan, Schwein, Fisch"
   [type]
@@ -34,7 +30,11 @@
 
 (defn snipe [endpoint]
   (->> endpoint
-       (request)
+       (str "https://www.imensa.de/karlsruhe")
+       (client/get)
+       (:body)
+       (h/parse)
+       (h/as-hickory)
        (s/select (s/class "aw-meal-category"))
        (map parse-metadata)))
 
@@ -68,3 +68,5 @@
                                          :wednesday (snipe "/mensa-am-adenauerring/mittwoch.html")
                                          :thursday (snipe "/mensa-am-adenauerring/donnerstag.html")
                                          :friday (snipe "/mensa-am-adenauerring/freitag.html")}}})))
+
+(-main)
