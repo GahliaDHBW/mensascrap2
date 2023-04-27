@@ -14,7 +14,7 @@
   "Valid types: vegetarisch, vegan, Schwein, Fisch"
   [type]
   (let [t (str/join (drop-last 2 (first (str/split type #" "))))]
-    (if (or (= t "vegetarisch") (= t "vegan") (= t "Schwein") (= t "Fisch")) t "-")))
+    (if (some (partial = t)  ["vegetarisch" "vegan" "Schwein" "Fish" "Rind" "Lamm" "Hähnchen"]) t "-")))
 
 (defn parse-metadata [patient]
   (let [name (->> patient
