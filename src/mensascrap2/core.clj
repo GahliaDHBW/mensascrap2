@@ -23,7 +23,9 @@
         price (->> patient
                    (s/select (s/class "aw-meal-price"))
                    (str)
-                   (re-find #"\d,\d\d"))]
+                   (re-find #"\d\,\d\d")
+                   (#(str/replace % "," "."))
+                   (#(str % "€")))]
     #_(snipe "/mensa-moltke/montag.html")
     {:name name :type type :price price}))
 
