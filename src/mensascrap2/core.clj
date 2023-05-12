@@ -6,30 +6,37 @@
             [hickory.select :as s])
   (:gen-class))
 
-(defn typecheck
+(defn- typecheck
   "Valid types: vegetarisch, vegan, Schwein, Fisch"
   [type]
-  (let [t (str/join (drop-last 2 (first (str/split type #" "))))]
+  (let [fuck (partial split-with (partial not= (first " ")))
+        t (str/join (drop-last 2 (first (fuck type))))]
     (if (some (partial = t)  ["vegetarisch" "vegan" "Schwein" "Fish" "Rind" "Lamm" "Hähnchen"]) t "-")))
 
-(defn parse-metadata [patient]
-  (let [name (->> patient
-                  (s/select (s/class "aw-meal-description"))
-                  ((comp first :content first)))
-        type (->> patient
-                  (s/select (s/and (s/tag "span")))
-                  ((comp first :content first))
-                  (typecheck))
-        price (->> patient
-                   (s/select (s/class "aw-meal-price"))
-                   (str)
-                   (re-find #"\d\,\d\d")
-                   (#(str/replace % "," "."))
-                   (#(str % "€")))]
-    #_(snipe "/mensa-moltke/montag.html")
-    {:name name :type type :price price}))
+(defn- getname [patient]
+  (->> patient
+       (s/select (s/class "aw-meal-description"))
+       ((comp first :content first))))
 
-(defn snipe [endpoint]
+(defn- gettype [patient]
+  (->> patient
+       (s/select (s/and (s/tag "span")))
+       ((comp first :content first))
+       (typecheck)))
+
+(defn- getprice [patient]
+  (->> patient
+       (s/select (s/class "aw-meal-price"))
+       (str)
+       (re-find #"\d\,\d\d")
+       (replace {\, \.})
+       (apply str)
+       (#(str % "€"))))
+
+(defn- parse-metadata [patient]
+  {:name (getname patient) :type (gettype patient) :price (getprice patient)})
+
+(defn- snipe [endpoint]
   (->> endpoint
        (str "https://www.imensa.de/karlsruhe")
        (client/get)
@@ -39,7 +46,7 @@
        (s/select (s/class "aw-meal-category"))
        (map parse-metadata)))
 
-(defn buildedn []
+(defn- buildedn []
   {:head {:api-version "v2.1"
           :last-update (.toString (java.time.LocalDateTime/now))
           :source "www.imensa.de"}
