@@ -24,6 +24,11 @@
        ((comp first :content first))
        (typecheck)))
 
+(defn- normalize-price [p]
+  (if (nil? p)
+    "0.00€"
+    (str p "€")))
+
 (defn- getprice [patient]
   (->> patient
        (s/select (s/class "aw-meal-price"))
@@ -31,7 +36,7 @@
        (re-find #"\d\,\d\d")
        (replace {\, \.})
        (apply str)
-       (#(str % "€"))))
+       (normalize-price)))
 
 (defn- parse-metadata [patient]
   {:name (getname patient) :type (gettype patient) :price (getprice patient)})
