@@ -53,7 +53,7 @@
 
 (defn- buildedn []
   {:head {:api-version "v2.1"
-          :last-update (.toString (java.time.LocalDateTime/now))
+          :last-update (str (java.time.LocalDateTime/now))
           :source "www.imensa.de"}
    :body {:Erzbergerstraße {:monday (snipe "/mensa-erzbergerstrasse/montag.html")
                             :tuesday (snipe "/mensa-erzbergerstrasse/dienstag.html")
