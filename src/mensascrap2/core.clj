@@ -9,8 +9,8 @@
 (defn- typecheck
   "Valid types: vegetarisch, vegan, Schwein, Fisch"
   [type]
-  (let [fuck (partial split-with (partial not= (first " ")))
-        t (str/join (drop-last 2 (first (fuck type))))]
+  (let [heck (partial split-with (partial not= (first " ")))
+        t (str/join (drop-last 2 (first (heck type))))]
     (if (some (partial = t)  ["vegetarisch" "vegan" "Schwein" "Fish" "Rind" "Lamm" "Hähnchen"]) t "-")))
 
 (defn- getname [patient]
@@ -84,4 +84,6 @@
 (defn -main []
   (println (generate-string (buildedn))))
 
-#_(buildedn)
+(comment
+  (buildedn)
+  (snipe "/mensa-erzbergerstrasse/montag.html"))
