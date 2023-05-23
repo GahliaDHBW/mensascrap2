@@ -48,38 +48,37 @@
        (:body)
        (h/parse)
        (h/as-hickory)
-       (s/select (s/class "aw-meal-category"))
-       (map parse-metadata)))
+       (s/select (s/class "aw-meal-category"))))
 
 (defn- buildedn []
   {:head {:api-version "v2.1"
           :last-update (str (java.time.LocalDateTime/now))
           :source "www.imensa.de"}
-   :body {:Erzbergerstraße {:monday (snipe "/mensa-erzbergerstrasse/montag.html")
-                            :tuesday (snipe "/mensa-erzbergerstrasse/dienstag.html")
-                            :wednesday (snipe "/mensa-erzbergerstrasse/mittwoch.html")
-                            :thursday (snipe "/mensa-erzbergerstrasse/donnerstag.html")
-                            :friday (snipe "/mensa-erzbergerstrasse/freitag.html")}
-          :Schloss-Gottesaue {:monday (snipe "/mensa-schloss-gottesaue/montag.html")
-                              :tuesday (snipe "/mensa-schloss-gottesaue/dienstag.html")
-                              :wednesday (snipe "/mensa-schloss-gottesaue/mittwoch.html")
-                              :thursday (snipe "/mensa-schloss-gottesaue/donnerstag.html")
-                              :friday (snipe "/mensa-schloss-gottesaue/freitag.html")}
-          :Cafetaria-Moltkestraße {:monday (snipe "/cafeteria-moltkestrasse-30/montag.html")
-                                   :tuesday (snipe "/cafeteria-moltkestrasse-30/dienstag.html")
-                                   :wednesday (snipe "/cafeteria-moltkestrasse-30/mittwoch.html")
-                                   :thursday (snipe "/cafeteria-moltkestrasse-30/donnerstag.html")
-                                   :friday (snipe "/cafeteria-moltkestrasse-30/freitag.html")}
-          :Mensa-Moltke {:monday (snipe "/mensa-moltke/montag.html")
-                         :tuesday (snipe "/mensa-moltke/dienstag.html")
-                         :wednesday (snipe "/mensa-moltke/mittwoch.html")
-                         :thursday (snipe "/mensa-moltke/donnerstag.html")
-                         :friday (snipe "/mensa-moltke/freitag.html")}
-          :Mensa-Adenauerring {:monday (snipe "/mensa-am-adenauerring/montag.html")
-                               :tuesday (snipe "/mensa-am-adenauerring/dienstag.html")
-                               :wednesday (snipe "/mensa-am-adenauerring/mittwoch.html")
-                               :thursday (snipe "/mensa-am-adenauerring/donnerstag.html")
-                               :friday (snipe "/mensa-am-adenauerring/freitag.html")}}})
+   :body {:Erzbergerstraße {:monday (map parse-metadata (snipe "/mensa-erzbergerstrasse/montag.html"))
+                            :tuesday (map parse-metadata (snipe "/mensa-erzbergerstrasse/dienstag.html"))
+                            :wednesday (map parse-metadata (snipe "/mensa-erzbergerstrasse/mittwoch.html"))
+                            :thursday (map parse-metadata (snipe "/mensa-erzbergerstrasse/donnerstag.html"))
+                            :friday (map parse-metadata (snipe "/mensa-erzbergerstrasse/freitag.html"))}
+          :Schloss-Gottesaue {:monday (map parse-metadata (snipe "/mensa-schloss-gottesaue/montag.html"))
+                              :tuesday (map parse-metadata (snipe "/mensa-schloss-gottesaue/dienstag.html"))
+                              :wednesday (map parse-metadata (snipe "/mensa-schloss-gottesaue/mittwoch.html"))
+                              :thursday (map parse-metadata (snipe "/mensa-schloss-gottesaue/donnerstag.html"))
+                              :friday (map parse-metadata (snipe "/mensa-schloss-gottesaue/freitag.html"))}
+          :Cafetaria-Moltkestraße {:monday (map parse-metadata (snipe "/cafeteria-moltkestrasse-30/montag.html"))
+                                   :tuesday (map parse-metadata (snipe "/cafeteria-moltkestrasse-30/dienstag.html"))
+                                   :wednesday (map parse-metadata (snipe "/cafeteria-moltkestrasse-30/mittwoch.html"))
+                                   :thursday (map parse-metadata (snipe "/cafeteria-moltkestrasse-30/donnerstag.html"))
+                                   :friday (map parse-metadata (snipe "/cafeteria-moltkestrasse-30/freitag.html"))}
+          :Mensa-Moltke {:monday (map parse-metadata (snipe "/mensa-moltke/montag.html"))
+                         :tuesday (map parse-metadata (snipe "/mensa-moltke/dienstag.html"))
+                         :wednesday (map parse-metadata (snipe "/mensa-moltke/mittwoch.html"))
+                         :thursday (map parse-metadata (snipe "/mensa-moltke/donnerstag.html"))
+                         :friday (map parse-metadata (snipe "/mensa-moltke/freitag.html"))}
+          :Mensa-Adenauerring {:monday (map parse-metadata (snipe "/mensa-am-adenauerring/montag.html"))
+                               :tuesday (map parse-metadata (snipe "/mensa-am-adenauerring/dienstag.html"))
+                               :wednesday (map parse-metadata (snipe "/mensa-am-adenauerring/mittwoch.html"))
+                               :thursday (map parse-metadata (snipe "/mensa-am-adenauerring/donnerstag.html"))
+                               :friday (map parse-metadata (snipe "/mensa-am-adenauerring/freitag.html"))}}})
 
 (defn -main []
   (println (generate-string (buildedn))))
