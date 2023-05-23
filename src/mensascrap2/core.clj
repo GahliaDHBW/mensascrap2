@@ -3,7 +3,8 @@
             [clj-http.client :as client]
             [cheshire.core :refer [generate-string]]
             [hickory.core :as h]
-            [hickory.select :as s])
+            [hickory.select :as s]
+            [java-time.api :as jt])
   (:gen-class))
 
 (def firstest (comp first :content first))
@@ -24,7 +25,6 @@
   (->> patient
        (s/select (s/class "aw-meal-description"))
        (firstest)))
-
 
 (defn- normalize-price [p]
   (if (nil? p)
@@ -54,7 +54,7 @@
 
 (defn- buildedn []
   {:head {:api-version "v2.1"
-          :last-update (str (java.time.LocalDateTime/now))
+          :last-update (jt/format "YY.MM.dd-HH:mm" (jt/local-date-time)) ; e.g. 23.05.23-09:37
           :source "www.imensa.de"}
    :body {:Erzbergerstraße {:monday (map parse-metadata (snipe "/mensa-erzbergerstrasse/montag.html"))
                             :tuesday (map parse-metadata (snipe "/mensa-erzbergerstrasse/dienstag.html"))
@@ -87,4 +87,6 @@
 
 (comment
   (buildedn)
-  (snipe "/mensa-erzbergerstrasse/montag.html"))
+  (def sample (first (snipe "/mensa-erzbergerstrasse/montag.html")))
+  (->> sample
+       (s/select (s/and (s/tag "span")))))
