@@ -6,23 +6,25 @@
             [hickory.select :as s])
   (:gen-class))
 
+(def firstest (comp first :content first))
+
 (defn- typecheck
-  "Valid types: vegetarisch, vegan, Schwein, Fisch"
   [type]
   (let [heck (partial split-with (partial not= (first " ")))
         t (str/join (drop-last 2 (first (heck type))))]
     (if (some (partial = t)  ["vegetarisch" "vegan" "Schwein" "Fish" "Rind" "Lamm" "Hähnchen"]) t "-")))
 
-(defn- getname [patient]
-  (->> patient
-       (s/select (s/class "aw-meal-description"))
-       ((comp first :content first))))
-
 (defn- gettype [patient]
   (->> patient
        (s/select (s/and (s/tag "span")))
-       ((comp first :content first))
+       (firstest)
        (typecheck)))
+
+(defn- getname [patient]
+  (->> patient
+       (s/select (s/class "aw-meal-description"))
+       (firstest)))
+
 
 (defn- normalize-price [p]
   (if (nil? p)
