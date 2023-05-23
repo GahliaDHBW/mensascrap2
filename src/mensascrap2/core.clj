@@ -63,7 +63,7 @@
        (s/select (s/class "aw-meal-category"))))
 
 (defn- buildedn []
-  {:head {:api-version "v2.1"
+  {:head {:api-version "v2.2"
           :last-update (jt/format "YY.MM.dd-HH:mm" (jt/local-date-time)) ; e.g. 23.05.23-09:37
           :source "www.imensa.de"}
    :body {:Erzbergerstraße {:monday (map parse-metadata (snipe "/mensa-erzbergerstrasse/montag.html"))
