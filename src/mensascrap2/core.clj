@@ -9,15 +9,14 @@
 
 (def firstest (comp first :content first))
 
-(defn- typecheck
-  [type]
+(defn- typecheck [type]
   (let [heck (partial split-with (partial not= (first " ")))
         t (str/join (drop-last 2 (first (heck type))))]
     (if (some (partial = t)  ["vegetarisch" "vegan" "Schwein" "Fish" "Rind" "Lamm" "Hähnchen"]) t "-")))
 
 (defn- gettype [patient]
   (->> patient
-       (s/select (s/and (s/tag "span")))
+       (s/select (s/tag "span"))
        (firstest)
        (typecheck)))
 
@@ -25,6 +24,17 @@
   (->> patient
        (s/select (s/class "aw-meal-description"))
        (firstest)))
+
+(defn- getallergies [patient]
+    (->> patient
+         (s/select (s/tag "span"))
+         (firstest)
+         (partition-by #(= \space %))
+         (map (partial remove #(or (= \  %) (= \space %))))
+         (remove empty?)
+         (map #(apply str %))
+         (drop-while #(not= "ALLERGEN" %))
+         (next)))
 
 (defn- normalize-price [p]
   (if (nil? p)
@@ -41,7 +51,7 @@
        (normalize-price)))
 
 (defn- parse-metadata [patient]
-  {:name (getname patient) :type (gettype patient) :price (getprice patient)})
+  {:name (getname patient) :type (gettype patient) :price (getprice patient) :allergies (getallergies patient)})
 
 (defn- snipe [endpoint]
   (->> endpoint
@@ -86,7 +96,11 @@
   (println (generate-string (buildedn))))
 
 (comment
+  (-main)
   (buildedn)
   (def sample (first (snipe "/mensa-erzbergerstrasse/montag.html")))
-  (->> sample
-       (s/select (s/and (s/tag "span")))))
+  (parse-metadata sample)
+  (gettype sample)
+  (getallergies sample)
+  (getprice sample)
+  (getname sample))
