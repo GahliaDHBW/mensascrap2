@@ -25,6 +25,9 @@
        (s/select (s/class "aw-meal-description"))
        (firstest)))
 
+(defn- normalize-allergies [a]
+  (if (nil? a) "unkown" a))
+
 (defn- getallergies [patient]
     (->> patient
          (s/select (s/tag "span"))
@@ -34,7 +37,10 @@
          (remove empty?)
          (map #(apply str %))
          (drop-while #(not= "ALLERGEN" %))
-         (next)))
+         (next)
+         (interpose ", ")
+         (apply str)
+         (normalize-allergies)))
 
 (defn- normalize-price [p]
   (if (nil? p)
