@@ -26,7 +26,7 @@
        (firstest)))
 
 (defn- normalize-allergies [a]
-  (if (nil? a) "unkown" a))
+  (if (empty? a) "unkown" a))
 
 (defn- getallergies [patient]
     (->> patient
