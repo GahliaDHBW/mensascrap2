@@ -57,7 +57,7 @@
        (normalize-price)))
 
 (defn- parse-metadata [patient]
-  {:name (getname patient) :type (gettype patient) :price (getprice patient) :allergies (getallergies patient)})
+  {:name (getname patient) :type (gettype patient) :price (getprice patient) :allergies (getallergies patient) :picture "https://github.com/port19x/port19.xyz/assets/82055622/bf6ebfe7-0283-4b38-b6a7-26d2c1065762"})
 
 (defn- snipe [endpoint]
   (->> endpoint
