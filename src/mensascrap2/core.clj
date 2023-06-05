@@ -25,22 +25,36 @@
        (s/select (s/class "aw-meal-description"))
        (firstest)))
 
+(defn normalize-picture [a]
+  (if (nil? a) "https://github.com/port19x/port19.xyz/assets/82055622/bf6ebfe7-0283-4b38-b6a7-26d2c1065762" a))
+
+(defn getpicture [query]
+  (->> query
+       (#(str/replace % #" " "+"))
+       (#(str "https://google.com/search?q=" %
+              "=lnms&tbm=isch&tbs=ic:color%2Cift:jpg%2Ciar:s"))
+       (client/get)
+       :body
+       (re-seq #"https://encrypted-tbn0.gstatic.com/images\?q=tbn:[a-zA-Z0-9-_]+")
+       first
+       normalize-picture))
+
 (defn- normalize-allergies [a]
   (if (empty? a) "unkown" a))
 
 (defn- getallergies [patient]
-    (->> patient
-         (s/select (s/tag "span"))
-         (firstest)
-         (partition-by #(= \space %))
-         (map (partial remove #(or (= \  %) (= \space %))))
-         (remove empty?)
-         (map #(apply str %))
-         (drop-while #(not= "ALLERGEN" %))
-         (next)
-         (interpose ", ")
-         (apply str)
-         (normalize-allergies)))
+  (->> patient
+       (s/select (s/tag "span"))
+       (firstest)
+       (partition-by #(= \space %))
+       (map (partial remove #(or (= \  %) (= \space %))))
+       (remove empty?)
+       (map #(apply str %))
+       (drop-while #(not= "ALLERGEN" %))
+       (next)
+       (interpose ", ")
+       (apply str)
+       (normalize-allergies)))
 
 (defn- normalize-price [p]
   (if (nil? p)
@@ -57,7 +71,7 @@
        (normalize-price)))
 
 (defn- parse-metadata [patient]
-  {:name (getname patient) :type (gettype patient) :price (getprice patient) :allergies (getallergies patient) :picture "https://github.com/port19x/port19.xyz/assets/82055622/bf6ebfe7-0283-4b38-b6a7-26d2c1065762"})
+  {:name (getname patient) :type (gettype patient) :price (getprice patient) :allergies (getallergies patient) :picture (getpicture (getname patient))})
 
 (defn- snipe [endpoint]
   (->> endpoint
