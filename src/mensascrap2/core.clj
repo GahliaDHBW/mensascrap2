@@ -32,7 +32,7 @@
   (->> query
        (#(str/replace % #" " "+"))
        (#(str "https://google.com/search?q=" %
-              "=lnms&tbm=isch&tbs=ic:color%2Cift:jpg%2Ciar:s"))
+              "=lnms&tbm=isch"))
        (client/get)
        :body
        (re-seq #"https://encrypted-tbn0.gstatic.com/images\?q=tbn:[a-zA-Z0-9-_]+")
